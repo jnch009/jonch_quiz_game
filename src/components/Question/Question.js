@@ -50,6 +50,31 @@ export default class Question extends Component {
       answerRender = null;
     }
 
+    const btnDisplay = () => {
+      if (this.state.selectedAnswer === "") {
+        return (
+          <button
+            className={className("btn", "btn-primary", questionSubmit)}
+            type="submit"
+            onClick={this.handleSubmitClick}
+            disabled
+          >
+            Submit
+          </button>
+        );
+      } else {
+        return (
+          <button
+            className={className("btn", "btn-primary", questionSubmit)}
+            type="submit"
+            onClick={this.handleSubmitClick}
+          >
+            Submit
+          </button>
+        );
+      }
+    };
+
     return (
       <div>
         <h1 className="display-4">{this.state.questionToAnswer.q}</h1>
@@ -87,13 +112,7 @@ export default class Question extends Component {
             Next
           </button>
         ) : (
-          <button
-            className={className("btn", "btn-primary", questionSubmit)}
-            type="submit"
-            onClick={this.handleSubmitClick}
-          >
-            Submit
-          </button>
+          btnDisplay()
         )}
 
         {answerRender}
