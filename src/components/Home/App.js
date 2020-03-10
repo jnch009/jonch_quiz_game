@@ -25,7 +25,17 @@ export default class App extends Component {
   }
 
   // after the user submits
-  handleQuestionUpdate = () => {};
+  handleQuestionUpdate = index => {
+    console.log("handleQuestionUpdate");
+    this.setState(
+      {
+        questionIndex: index
+      },
+      () => {
+        console.log(this.state.questionIndex);
+      }
+    );
+  };
 
   render() {
     // next button or timeout to show next question
@@ -34,6 +44,8 @@ export default class App extends Component {
         <div className="jumbotron">
           <Question
             questionToAnswer={quizQuestions[this.state.questionIndex]}
+            questionIndex={this.state.questionIndex}
+            onHandleQuestionUpdate={this.handleQuestionUpdate}
           />
         </div>
       </div>

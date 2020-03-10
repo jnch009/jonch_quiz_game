@@ -8,7 +8,6 @@ export default class Question extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionToAnswer: this.props.questionToAnswer,
       selectedAnswer: "",
       showAnswer: false
     };
@@ -24,16 +23,22 @@ export default class Question extends Component {
     this.setState({ showAnswer: true });
   };
 
+  handleNextClick = () => {
+    console.log("handleNextClick");
+    this.props.onHandleQuestionUpdate(this.props.questionIndex + 1);
+  };
+
   render() {
+    console.log(this.props.questionToAnswer);
     const arrQuestions = [
-      this.state.questionToAnswer.choice_1,
-      this.state.questionToAnswer.choice_2,
-      this.state.questionToAnswer.choice_3
+      this.props.questionToAnswer.choice_1,
+      this.props.questionToAnswer.choice_2,
+      this.props.questionToAnswer.choice_3
     ];
     let answerRender;
 
     if (this.state.showAnswer === true) {
-      this.state.questionToAnswer.a === this.state.selectedAnswer
+      this.props.questionToAnswer.a === this.state.selectedAnswer
         ? (answerRender = (
             <h6 className={className(answerBox, "bg-success")}>
               You are correct!
@@ -41,7 +46,7 @@ export default class Question extends Component {
           ))
         : (answerRender = (
             <h6 className={className(answerBox, "bg-danger")}>
-              Incorrect! This is your answer {this.state.questionToAnswer.a}
+              Incorrect! This is your answer {this.props.questionToAnswer.a}
               <br />
               The correct answer is {this.state.selectedAnswer}
             </h6>
@@ -77,7 +82,7 @@ export default class Question extends Component {
 
     return (
       <div>
-        <h1 className="display-4">{this.state.questionToAnswer.q}</h1>
+        <h1 className="display-4">{this.props.questionToAnswer.q}</h1>
         <div className="flexAnswers">
           {arrQuestions.map(v => (
             <div key={v}>
@@ -107,7 +112,7 @@ export default class Question extends Component {
           <button
             className={className("btn", "btn-primary", questionSubmit)}
             type="submit"
-            onClick
+            onClick={this.handleNextClick}
           >
             Next
           </button>
