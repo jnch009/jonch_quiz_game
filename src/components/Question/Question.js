@@ -91,24 +91,15 @@ export default class Question extends Component {
         <div className="flexAnswers">
           {arrQuestions.map(v => (
             <div key={v}>
-              {this.state.showAnswer ? (
-                <input
-                  id={v}
-                  type="radio"
-                  name="question"
-                  checked={this.state.selectedAnswer === v}
-                  disabled
-                  onClick={() => this.handleRadioClick(v)}
-                />
-              ) : (
-                <input
-                  id={v}
-                  type="radio"
-                  name="question"
-                  checked={this.state.selectedAnswer === v}
-                  onClick={() => this.handleRadioClick(v)}
-                />
-              )}
+              <input
+                id={v}
+                type="radio"
+                name="question"
+                // true or false for checked and disabled properties
+                checked={this.state.selectedAnswer === v}
+                disabled={this.state.showAnswer}
+                onChange={() => this.handleRadioClick(v)}
+              />
               <label htmlFor={v} className="lead">
                 {v}
               </label>
