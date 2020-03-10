@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-
+import className from "classnames";
 import "./Question.css";
 
+const answerBox = "answerBox";
 export default class Question extends Component {
   constructor(props) {
     super(props);
@@ -33,14 +34,16 @@ export default class Question extends Component {
     if (this.state.showAnswer === true) {
       this.state.questionToAnswer.a === this.state.selectedAnswer
         ? (answerRender = (
-            <div className="bg-success">
-              {this.state.questionToAnswer.a}:{this.state.selectedAnswer}
-            </div>
+            <h6 className={className(answerBox, "bg-success")}>
+              You are correct!
+            </h6>
           ))
         : (answerRender = (
-            <div className="bg-danger">
-              {this.state.questionToAnswer.a}:{this.state.selectedAnswer}
-            </div>
+            <h6 className={className(answerBox, "bg-danger")}>
+              Incorrect! This is your answer {this.state.questionToAnswer.a}
+              <br />
+              The correct answer is {this.state.selectedAnswer}
+            </h6>
           ));
     } else {
       answerRender = null;
@@ -51,12 +54,22 @@ export default class Question extends Component {
         <h1 className="display-4">{this.state.questionToAnswer.q}</h1>
         {arrQuestions.map(v => (
           <div key={v}>
-            <input
-              id={v}
-              type="radio"
-              name="question"
-              onClick={() => this.handleRadioClick(v)}
-            />
+            {this.state.showAnswer ? (
+              <input
+                id={v}
+                type="radio"
+                name="question"
+                disabled
+                onClick={() => this.handleRadioClick(v)}
+              />
+            ) : (
+              <input
+                id={v}
+                type="radio"
+                name="question"
+                onClick={() => this.handleRadioClick(v)}
+              />
+            )}
             <label htmlFor={v} className="lead">
               {v}
             </label>
