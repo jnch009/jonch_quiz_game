@@ -26,15 +26,9 @@ export default class App extends Component {
 
   // after the user submits
   handleQuestionUpdate = index => {
-    console.log("handleQuestionUpdate");
-    this.setState(
-      {
-        questionIndex: index
-      },
-      () => {
-        console.log(this.state.questionIndex);
-      }
-    );
+    this.setState({
+      questionIndex: index
+    });
   };
 
   render() {

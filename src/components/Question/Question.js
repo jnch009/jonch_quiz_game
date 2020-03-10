@@ -24,7 +24,6 @@ export default class Question extends Component {
   };
 
   handleNextClick = () => {
-    console.log("handleNextClick");
     this.setState({
       selectedAnswer: "",
       showAnswer: false
@@ -50,9 +49,9 @@ export default class Question extends Component {
           ))
         : (answerRender = (
             <h6 className={className(answerBox, "bg-danger")}>
-              Incorrect! This is your answer {this.props.questionToAnswer.a}
+              Incorrect! This is your answer {this.state.selectedAnswer}
               <br />
-              The correct answer is {this.state.selectedAnswer}
+              The correct answer is {this.props.questionToAnswer.a}
             </h6>
           ));
     } else {
@@ -95,6 +94,7 @@ export default class Question extends Component {
                   id={v}
                   type="radio"
                   name="question"
+                  checked={this.state.selectedAnswer === v}
                   disabled
                   onClick={() => this.handleRadioClick(v)}
                 />
@@ -103,6 +103,7 @@ export default class Question extends Component {
                   id={v}
                   type="radio"
                   name="question"
+                  checked={this.state.selectedAnswer === v}
                   onClick={() => this.handleRadioClick(v)}
                 />
               )}
