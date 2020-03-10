@@ -19,12 +19,21 @@ export default class App extends Component {
     this.state = {
       // below userAnswers not needed if only score is provided at the end. Will think about adding this later.
       // userAnswers: [],
-      correctAnswers: Array(quizQuestions.length).fill(false),
+      correctAnswers: 0,
       questionIndex: 0
     };
   }
 
-  // after the user submits
+  //after the user submits
+  handleQuestionSubmit = correct => {
+    if (correct) {
+      this.setState({
+        correctAnswers: this.state.correctAnswers + 1
+      });
+    }
+  };
+
+  // after the user hits 'Next' button
   handleQuestionUpdate = index => {
     this.setState({
       questionIndex: index
@@ -40,6 +49,7 @@ export default class App extends Component {
             questionToAnswer={quizQuestions[this.state.questionIndex]}
             questionIndex={this.state.questionIndex}
             onHandleQuestionUpdate={this.handleQuestionUpdate}
+            onHandleQuestionSubmit={this.handleQuestionSubmit}
           />
         </div>
       </div>

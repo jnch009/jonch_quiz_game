@@ -21,6 +21,9 @@ export default class Question extends Component {
 
   handleSubmitClick = () => {
     this.setState({ showAnswer: true });
+    this.props.onHandleQuestionSubmit(
+      this.state.selectedAnswer === this.props.questionToAnswer.a
+    );
   };
 
   handleNextClick = () => {
@@ -32,7 +35,6 @@ export default class Question extends Component {
   };
 
   render() {
-    console.log(this.props.questionToAnswer);
     const arrQuestions = [
       this.props.questionToAnswer.choice_1,
       this.props.questionToAnswer.choice_2,
