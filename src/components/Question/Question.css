@@ -5,7 +5,17 @@
 }
 
 .answerBox {
-  margin: 0.5rem;
+  margin-top: 1rem;
   padding: 0.5rem;
   animation: expand 0.5s ease;
+}
+
+.flexAnswers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.questionSubmit {
+  margin: 0.5rem;
 }

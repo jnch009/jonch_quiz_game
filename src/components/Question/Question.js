@@ -3,6 +3,7 @@ import className from "classnames";
 import "./Question.css";
 
 const answerBox = "answerBox";
+const questionSubmit = "questionSubmit";
 export default class Question extends Component {
   constructor(props) {
     super(props);
@@ -52,36 +53,49 @@ export default class Question extends Component {
     return (
       <div>
         <h1 className="display-4">{this.state.questionToAnswer.q}</h1>
-        {arrQuestions.map(v => (
-          <div key={v}>
-            {this.state.showAnswer ? (
-              <input
-                id={v}
-                type="radio"
-                name="question"
-                disabled
-                onClick={() => this.handleRadioClick(v)}
-              />
-            ) : (
-              <input
-                id={v}
-                type="radio"
-                name="question"
-                onClick={() => this.handleRadioClick(v)}
-              />
-            )}
-            <label htmlFor={v} className="lead">
-              {v}
-            </label>
-          </div>
-        ))}
-        <button
-          className="btn btn-primary"
-          type="submit"
-          onClick={this.handleSubmitClick}
-        >
-          Submit
-        </button>
+        <div className="flexAnswers">
+          {arrQuestions.map(v => (
+            <div key={v}>
+              {this.state.showAnswer ? (
+                <input
+                  id={v}
+                  type="radio"
+                  name="question"
+                  disabled
+                  onClick={() => this.handleRadioClick(v)}
+                />
+              ) : (
+                <input
+                  id={v}
+                  type="radio"
+                  name="question"
+                  onClick={() => this.handleRadioClick(v)}
+                />
+              )}
+              <label htmlFor={v} className="lead">
+                {v}
+              </label>
+            </div>
+          ))}
+        </div>
+        {this.state.showAnswer ? (
+          <button
+            className={className("btn", "btn-primary", questionSubmit)}
+            type="submit"
+            onClick
+          >
+            Next
+          </button>
+        ) : (
+          <button
+            className={className("btn", "btn-primary", questionSubmit)}
+            type="submit"
+            onClick={this.handleSubmitClick}
+          >
+            Submit
+          </button>
+        )}
+
         {answerRender}
       </div>
     );
