@@ -1,0 +1,29 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: green;
+  color: black;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.jumbotron {
+  width: 700px;
+  height: 400px;
+}
+
+input {
+  margin: 12px;
+}
