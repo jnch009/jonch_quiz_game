@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./Question.css";
+
 export default class Question extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +28,23 @@ export default class Question extends Component {
       this.state.questionToAnswer.choice_2,
       this.state.questionToAnswer.choice_3
     ];
+    let answerRender;
+
+    if (this.state.showAnswer === true) {
+      this.state.questionToAnswer.a === this.state.selectedAnswer
+        ? (answerRender = (
+            <div className="bg-success">
+              {this.state.questionToAnswer.a}:{this.state.selectedAnswer}
+            </div>
+          ))
+        : (answerRender = (
+            <div className="bg-danger">
+              {this.state.questionToAnswer.a}:{this.state.selectedAnswer}
+            </div>
+          ));
+    } else {
+      answerRender = null;
+    }
 
     return (
       <div>
@@ -50,9 +69,7 @@ export default class Question extends Component {
         >
           Submit
         </button>
-        {this.state.showAnswer ? (
-          <div>{this.state.questionToAnswer.a}</div>
-        ) : null}
+        {answerRender}
       </div>
     );
   }
