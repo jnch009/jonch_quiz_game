@@ -25,6 +25,10 @@ export default class Question extends Component {
 
   handleNextClick = () => {
     console.log("handleNextClick");
+    this.setState({
+      selectedAnswer: "",
+      showAnswer: false
+    });
     this.props.onHandleQuestionUpdate(this.props.questionIndex + 1);
   };
 
@@ -119,7 +123,6 @@ export default class Question extends Component {
         ) : (
           btnDisplay()
         )}
-
         {answerRender}
       </div>
     );
