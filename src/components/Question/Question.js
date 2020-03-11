@@ -87,7 +87,7 @@ export default class Question extends Component {
 
     return (
       <div>
-        <h1 className="display-4">{this.props.questionToAnswer.q}</h1>
+        <h1>{this.props.questionToAnswer.q}</h1>
         <div className="flexAnswers">
           {arrQuestions.map(v => (
             <div key={v}>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import className from "classnames";
 import Question from "../Question/Question";
 
 import "./App.css";
@@ -7,10 +8,34 @@ import "./App.css";
 // store by reference vs store by value
 // reference can still be updated even if it's defined as const
 const quizQuestions = [
-  { q: "Question 1", choice_1: "1", choice_2: "2", choice_3: "3", a: "2" },
-  { q: "Question 2", choice_1: "1", choice_2: "2", choice_3: "3", a: "1" },
-  { q: "Question 3", choice_1: "1", choice_2: "2", choice_3: "3", a: "3" },
-  { q: "Question 4", choice_1: "1", choice_2: "2", choice_3: "3", a: "3" }
+  {
+    q: "How many sides does an octagon have?",
+    choice_1: "6",
+    choice_2: "8",
+    choice_3: "5",
+    a: "6"
+  },
+  {
+    q: "What is a synonym for careless?",
+    choice_1: "Negligent",
+    choice_2: "Dishonest",
+    choice_3: "Unworthy",
+    a: "Negligent"
+  },
+  {
+    q: "What is the derivative of 3x^2?",
+    choice_1: "6x^2",
+    choice_2: "x^3",
+    choice_3: "6x",
+    a: "6x"
+  },
+  {
+    q: "What famous phenomenon is Sir Isaac Newton known for?",
+    choice_1: "Inventor of Electricity",
+    choice_2: "The equation for the speed of light",
+    choice_3: "Three laws of motion",
+    a: "Three laws of motion"
+  }
 ];
 
 const scoreMessage = score => {
@@ -22,6 +47,7 @@ const scoreMessage = score => {
     return "You need to work harder!";
   }
 };
+const questionSubmit = "questionSubmit";
 
 export default class App extends Component {
   constructor(props) {
@@ -58,6 +84,14 @@ export default class App extends Component {
     }
   };
 
+  handleQuizReset = () => {
+    this.setState({
+      correctAnswers: 0,
+      questionIndex: 0,
+      quizCompleted: false
+    });
+  };
+
   render() {
     // next button or timeout to show next question
     let currentScore = (this.state.correctAnswers / quizQuestions.length) * 100;
@@ -70,6 +104,13 @@ export default class App extends Component {
               <div>Here is how you did</div>
               <h1 className="display-1">{currentScore}%</h1>
               <div className="display-4">{scoreMessage(currentScore)}</div>
+              <button
+                className={className("btn", "btn-primary", questionSubmit)}
+                type="submit"
+                onClick={this.handleQuizReset}
+              >
+                Restart Quiz
+              </button>
             </>
           ) : (
             <Question
