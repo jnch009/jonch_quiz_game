@@ -46,15 +46,19 @@ export default class App extends Component {
     return (
       <div className="App">
         <div className="jumbotron">
-          Congratulations on finishing the quiz! <br /> Here is how you did
-        </div>
-        <div className="jumbotron">
-          <Question
-            questionToAnswer={quizQuestions[this.state.questionIndex]}
-            questionIndex={this.state.questionIndex}
-            onHandleQuestionUpdate={this.handleQuestionUpdate}
-            onHandleQuestionSubmit={this.handleQuestionSubmit}
-          />
+          {this.state.quizCompleted ? (
+            <>
+              <div>Congratulations on finishing the quiz!</div>
+              <div>Here is how you did</div>
+            </>
+          ) : (
+            <Question
+              questionToAnswer={quizQuestions[this.state.questionIndex]}
+              questionIndex={this.state.questionIndex}
+              onHandleQuestionUpdate={this.handleQuestionUpdate}
+              onHandleQuestionSubmit={this.handleQuestionSubmit}
+            />
+          )}
         </div>
       </div>
     );
