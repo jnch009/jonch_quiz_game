@@ -13,6 +13,16 @@ const quizQuestions = [
   { q: "Question 4", choice_1: "1", choice_2: "2", choice_3: "3", a: "3" }
 ];
 
+const scoreMessage = score => {
+  if (score >= 75) {
+    return "Great Work!";
+  } else if (score < 75 && score >= 50) {
+    return "Not good enough!";
+  } else {
+    return "You need to work harder!";
+  }
+};
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -50,6 +60,7 @@ export default class App extends Component {
 
   render() {
     // next button or timeout to show next question
+
     return (
       <div className="App">
         <div className="jumbotron">
@@ -57,6 +68,14 @@ export default class App extends Component {
             <>
               <div>Congratulations on finishing the quiz!</div>
               <div>Here is how you did</div>
+              <h1 className="display-1">
+                {(this.state.correctAnswers / quizQuestions.length) * 100}%
+              </h1>
+              <div className="display-4">
+                {scoreMessage(
+                  (this.state.correctAnswers / quizQuestions.length) * 100
+                )}
+              </div>
             </>
           ) : (
             <Question
