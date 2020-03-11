@@ -36,9 +36,16 @@ export default class App extends Component {
 
   // after the user hits 'Next' button
   handleQuestionUpdate = index => {
-    this.setState({
-      questionIndex: index
-    });
+    if (index >= quizQuestions.length) {
+      this.setState({
+        quizCompleted: true,
+        questionIndex: index
+      });
+    } else {
+      this.setState({
+        questionIndex: index
+      });
+    }
   };
 
   render() {
