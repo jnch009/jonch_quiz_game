@@ -19,3 +19,7 @@
 .questionSubmit {
   margin: 0.5rem;
 }
+
+.questionWrapper {
+  overflow: hidden;
+}
