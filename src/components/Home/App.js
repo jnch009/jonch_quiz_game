@@ -20,7 +20,8 @@ export default class App extends Component {
       // below userAnswers not needed if only score is provided at the end. Will think about adding this later.
       // userAnswers: [],
       correctAnswers: 0,
-      questionIndex: 0
+      questionIndex: 0,
+      quizCompleted: false
     };
   }
 
@@ -44,6 +45,9 @@ export default class App extends Component {
     // next button or timeout to show next question
     return (
       <div className="App">
+        <div className="jumbotron">
+          Congratulations on finishing the quiz! <br /> Here is how you did
+        </div>
         <div className="jumbotron">
           <Question
             questionToAnswer={quizQuestions[this.state.questionIndex]}
