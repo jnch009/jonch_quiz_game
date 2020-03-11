@@ -106,6 +106,7 @@ export default class Question extends Component {
             </div>
           ))}
         </div>
+        {answerRender}
         {this.state.showAnswer ? (
           <button
             className={className("btn", "btn-primary", questionSubmit)}
@@ -117,7 +118,6 @@ export default class Question extends Component {
         ) : (
           btnDisplay()
         )}
-        {answerRender}
       </div>
     );
   }
