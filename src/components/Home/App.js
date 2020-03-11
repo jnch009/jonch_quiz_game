@@ -27,7 +27,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // below userAnswers not needed if only score is provided at the end. Will think about adding this later.
+      // below userAnswers not needed if individual question scores is provided at the end. Will think about adding this later.
       // userAnswers: [],
       correctAnswers: 0,
       questionIndex: 0,
@@ -60,7 +60,7 @@ export default class App extends Component {
 
   render() {
     // next button or timeout to show next question
-
+    let currentScore = (this.state.correctAnswers / quizQuestions.length) * 100;
     return (
       <div className="App">
         <div className="jumbotron">
@@ -68,14 +68,8 @@ export default class App extends Component {
             <>
               <div>Congratulations on finishing the quiz!</div>
               <div>Here is how you did</div>
-              <h1 className="display-1">
-                {(this.state.correctAnswers / quizQuestions.length) * 100}%
-              </h1>
-              <div className="display-4">
-                {scoreMessage(
-                  (this.state.correctAnswers / quizQuestions.length) * 100
-                )}
-              </div>
+              <h1 className="display-1">{currentScore}%</h1>
+              <div className="display-4">{scoreMessage(currentScore)}</div>
             </>
           ) : (
             <Question
