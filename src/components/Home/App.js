@@ -13,7 +13,7 @@ const quizQuestions = [
     choice_1: "6",
     choice_2: "8",
     choice_3: "5",
-    a: "6"
+    a: "8"
   },
   {
     q: "What is a synonym for careless?",
