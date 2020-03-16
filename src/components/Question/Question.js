@@ -60,7 +60,16 @@ export default class Question extends Component {
       answerRender = null;
     }
 
-    const btnDisplay = () => {
+    const btnDisplay = (
+       <button
+         className={className("btn", "btn-primary", questionSubmit)}
+         type="submit"
+         onClick={this.handleSubmitClick}
+         disabled={!this.state.selectedAnswer}
+       >
+         Submit
+       </button>
+     );
       if (this.state.selectedAnswer === "") {
         return (
           <button
