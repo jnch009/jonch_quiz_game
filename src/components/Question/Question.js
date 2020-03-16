@@ -61,56 +61,33 @@ export default class Question extends Component {
     }
 
     const btnDisplay = (
-       <button
-         className={className("btn", "btn-primary", questionSubmit)}
-         type="submit"
-         onClick={this.handleSubmitClick}
-         disabled={!this.state.selectedAnswer}
-       >
-         Submit
-       </button>
-     );
-      if (this.state.selectedAnswer === "") {
-        return (
-          <button
-            className={className("btn", "btn-primary", questionSubmit)}
-            type="submit"
-            onClick={this.handleSubmitClick}
-            disabled
-          >
-            Submit
-          </button>
-        );
-      } else {
-        return (
-          <button
-            className={className("btn", "btn-primary", questionSubmit)}
-            type="submit"
-            onClick={this.handleSubmitClick}
-          >
-            Submit
-          </button>
-        );
-      }
-    };
+      <button
+        className={className("btn", "btn-primary", questionSubmit)}
+        type="submit"
+        onClick={this.handleSubmitClick}
+        disabled={!this.state.selectedAnswer}
+      >
+        Submit
+      </button>
+    );
 
     return (
       <div className="questionWrapper">
         <h4>{this.props.questionToAnswer.q}</h4>
         <div className="flexAnswers">
-          {arrQuestions.map(v => (
-            <div key={v}>
+          {arrQuestions.map(question => (
+            <div key={question}>
               <input
-                id={v}
+                id={question}
                 type="radio"
                 name="question"
                 // true or false for checked and disabled properties
-                checked={this.state.selectedAnswer === v}
+                checked={this.state.selectedAnswer === question}
                 disabled={this.state.showAnswer}
-                onChange={() => this.handleRadioClick(v)}
+                onChange={() => this.handleRadioClick(question)}
               />
-              <label htmlFor={v} className="lead">
-                {v}
+              <label htmlFor={question} className="lead">
+                {question}
               </label>
             </div>
           ))}
@@ -125,7 +102,7 @@ export default class Question extends Component {
             Next
           </button>
         ) : (
-          btnDisplay()
+          btnDisplay
         )}
       </div>
     );
