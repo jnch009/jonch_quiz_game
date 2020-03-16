@@ -42,7 +42,7 @@ export default class Question extends Component {
     ];
     let answerRender;
 
-    if (this.state.showAnswer === true) {
+    if (this.state.showAnswer) {
       this.props.questionToAnswer.a === this.state.selectedAnswer
         ? (answerRender = (
             <h6 className={className(answerBox, "bg-success")}>
