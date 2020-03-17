@@ -1,5 +1,6 @@
-import React, { Component } from "react";
 import className from "classnames";
+import React, { Component } from "react";
+
 import Question from "../Question/Question";
 
 import "./App.css";
@@ -7,37 +8,7 @@ import "./App.css";
 // defining questions in global scope so that it doesn't get redefined every single time
 // store by reference vs store by value
 // reference can still be updated even if it's defined as const
-const quizQuestions = [
-  {
-    q: "How many sides does an octagon have?",
-    choice_1: "6",
-    choice_2: "8",
-    choice_3: "5",
-    a: "8"
-  },
-  {
-    q: "What is a synonym for careless?",
-    choice_1: "Negligent",
-    choice_2: "Dishonest",
-    choice_3: "Unworthy",
-    a: "Negligent"
-  },
-  {
-    q: "What is the derivative of 3x^2?",
-    choice_1: "6x^2",
-    choice_2: "x^3",
-    choice_3: "6x",
-    a: "6x"
-  },
-  {
-    q: "What famous phenomenon is Sir Isaac Newton known for?",
-    choice_1: "Inventor of Electricity",
-    choice_2: "The equation for the speed of light",
-    choice_3: "Three laws of motion",
-    a: "Three laws of motion"
-  }
-];
-
+const quizQuestions = [];
 const scoreMessage = score => {
   if (score >= 75) {
     return "Great Work!";
@@ -57,8 +28,28 @@ export default class App extends Component {
       // userAnswers: [],
       correctAnswers: 0,
       questionIndex: 0,
-      quizCompleted: false
+      quizCompleted: false,
+      loading: true
     };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3001/")
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        data.map(questions => {
+          quizQuestions.push({
+            q: questions["Question"],
+            choice_1: questions["Choice 1"],
+            choice_2: questions["Choice 2"],
+            choice_3: questions["Choice 3"],
+            a: questions["Answer"]
+          });
+        });
+        this.setState({ loading: false });
+      });
   }
 
   //after the user submits
@@ -93,6 +84,10 @@ export default class App extends Component {
   };
 
   render() {
+    if (this.state.loading) {
+      return <div>Loading...</div>;
+    }
+
     // next button or timeout to show next question
     let currentScore = (this.state.correctAnswers / quizQuestions.length) * 100;
     return (
