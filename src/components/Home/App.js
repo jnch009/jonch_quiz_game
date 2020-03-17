@@ -39,13 +39,13 @@ export default class App extends Component {
         return res.json();
       })
       .then(data => {
-        data.map(questions => {
+        data.map(quizQuestion => {
           quizQuestions.push({
-            q: questions["Question"],
-            choice_1: questions["Choice 1"],
-            choice_2: questions["Choice 2"],
-            choice_3: questions["Choice 3"],
-            a: questions["Answer"]
+            q: quizQuestion["Question"],
+            choiceOne: quizQuestion["Choice 1"],
+            choiceTwo: quizQuestion["Choice 2"],
+            choiceThree: quizQuestion["Choice 3"],
+            a: quizQuestion["Answer"]
           });
         });
         this.setState({ loading: false });

@@ -1,5 +1,6 @@
-import React, { Component } from "react";
 import className from "classnames";
+import React, { Component } from "react";
+
 import "./Question.css";
 
 const answerBox = "answerBox";
@@ -36,9 +37,9 @@ export default class Question extends Component {
 
   render() {
     const arrQuestions = [
-      this.props.questionToAnswer.choice_1,
-      this.props.questionToAnswer.choice_2,
-      this.props.questionToAnswer.choice_3
+      this.props.questionToAnswer.choiceOne,
+      this.props.questionToAnswer.choiceTwo,
+      this.props.questionToAnswer.choiceThree
     ];
     let answerRender;
 
@@ -81,14 +82,11 @@ export default class Question extends Component {
                 id={question}
                 type="radio"
                 name="question"
-                // true or false for checked and disabled properties
                 checked={this.state.selectedAnswer === question}
                 disabled={this.state.showAnswer}
                 onChange={() => this.handleRadioClick(question)}
               />
-              <label htmlFor={question} className="lead">
-                {question}
-              </label>
+              <label htmlFor={question}>{question}</label>
             </div>
           ))}
         </div>
