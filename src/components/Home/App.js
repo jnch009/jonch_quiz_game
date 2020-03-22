@@ -8,7 +8,7 @@ import "./App.css";
 // defining questions in global scope so that it doesn't get redefined every single time
 // store by reference vs store by value
 // reference can still be updated even if it's defined as const
-const quizQuestions = [];
+// const quizQuestions = [];
 const scoreMessage = score => {
   if (score >= 75) {
     return "Great Work!";
@@ -26,6 +26,7 @@ export default class App extends Component {
     this.state = {
       // below userAnswers not needed if individual question scores is provided at the end. Will think about adding this later.
       // userAnswers: [],
+      quizQuestions: [],
       correctAnswers: 0,
       questionIndex: 0,
       quizCompleted: false,
@@ -40,12 +41,19 @@ export default class App extends Component {
       })
       .then(data => {
         data.map(quizQuestion => {
-          quizQuestions.push({
-            q: quizQuestion["Question"],
-            choiceOne: quizQuestion["Choice 1"],
-            choiceTwo: quizQuestion["Choice 2"],
-            choiceThree: quizQuestion["Choice 3"],
-            a: quizQuestion["Answer"]
+          this.setState({
+            quizQuestions: [
+              ...this.state.quizQuestions,
+              {
+                q: quizQuestion["Question"],
+                choices: [
+                  quizQuestion["Choice 1"],
+                  quizQuestion["Choice 2"],
+                  quizQuestion["Choice 3"]
+                ],
+                a: quizQuestion["Answer"]
+              }
+            ]
           });
         });
         this.setState({ loading: false });
@@ -63,7 +71,7 @@ export default class App extends Component {
 
   // after the user hits 'Next' button
   handleQuestionUpdate = index => {
-    if (index >= quizQuestions.length) {
+    if (index >= this.state.quizQuestions.length) {
       this.setState({
         quizCompleted: true,
         questionIndex: index
@@ -89,7 +97,8 @@ export default class App extends Component {
     }
 
     // next button or timeout to show next question
-    let currentScore = (this.state.correctAnswers / quizQuestions.length) * 100;
+    let currentScore =
+      (this.state.correctAnswers / this.state.quizQuestions.length) * 100;
     return (
       <div className="App">
         <div className="jumbotron">
@@ -109,7 +118,9 @@ export default class App extends Component {
             </>
           ) : (
             <Question
-              questionToAnswer={quizQuestions[this.state.questionIndex]}
+              questionToAnswer={
+                this.state.quizQuestions[this.state.questionIndex]
+              }
               questionIndex={this.state.questionIndex}
               onHandleQuestionUpdate={this.handleQuestionUpdate}
               onHandleQuestionSubmit={this.handleQuestionSubmit}

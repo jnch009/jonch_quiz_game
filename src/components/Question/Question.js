@@ -14,9 +14,9 @@ export default class Question extends Component {
     };
   }
 
-  handleRadioClick = v => {
+  handleRadioClick = radio => {
     this.setState({
-      selectedAnswer: v
+      selectedAnswer: radio
     });
   };
 
@@ -36,11 +36,6 @@ export default class Question extends Component {
   };
 
   render() {
-    const arrQuestions = [
-      this.props.questionToAnswer.choiceOne,
-      this.props.questionToAnswer.choiceTwo,
-      this.props.questionToAnswer.choiceThree
-    ];
     let answerRender;
 
     if (this.state.showAnswer) {
@@ -76,17 +71,17 @@ export default class Question extends Component {
       <div className="questionWrapper">
         <h4>{this.props.questionToAnswer.q}</h4>
         <div className="flexAnswers">
-          {arrQuestions.map(question => (
-            <div key={question}>
+          {this.props.questionToAnswer.choices.map(choice => (
+            <div key={choice}>
               <input
-                id={question}
+                id={choice}
                 type="radio"
                 name="question"
-                checked={this.state.selectedAnswer === question}
+                checked={this.state.selectedAnswer === choice}
                 disabled={this.state.showAnswer}
-                onChange={() => this.handleRadioClick(question)}
+                onChange={() => this.handleRadioClick(choice)}
               />
-              <label htmlFor={question}>{question}</label>
+              <label htmlFor={choice}>{choice}</label>
             </div>
           ))}
         </div>
