@@ -1,9 +1,9 @@
-import className from "classnames";
-import React, { Component } from "react";
+import className from 'classnames';
+import React, { Component } from 'react';
 
-import Question from "../Question/Question";
+import Question from '../Question/Question';
 
-import "./App.css";
+import './App.css';
 
 // defining questions in global scope so that it doesn't get redefined every single time
 // store by reference vs store by value
@@ -11,14 +11,14 @@ import "./App.css";
 // const quizQuestions = [];
 const scoreMessage = score => {
   if (score >= 75) {
-    return "Great Work!";
+    return 'Great Work!';
   } else if (score < 75 && score >= 50) {
-    return "Not good enough!";
+    return 'Not good enough!';
   } else {
-    return "You need to work harder!";
+    return 'You need to work harder!';
   }
 };
-const questionSubmit = "questionSubmit";
+const questionSubmit = 'questionSubmit';
 
 export default class App extends Component {
   constructor(props) {
@@ -30,32 +30,30 @@ export default class App extends Component {
       correctAnswers: 0,
       questionIndex: 0,
       quizCompleted: false,
-      loading: true
+      loading: true,
     };
   }
 
   componentDidMount() {
-    fetch("http://localhost:3001/")
-      .then(res => {
-        return res.json();
-      })
+    fetch(`${process.env.REACT_APP_FETCH_API}`)
+      .then(res => res.json())
       .then(data => {
-        data.map(quizQuestion => {
+        data.map(quizQuestion =>
           this.setState({
             quizQuestions: [
               ...this.state.quizQuestions,
               {
-                q: quizQuestion["Question"],
+                q: quizQuestion['Question'],
                 choices: [
-                  quizQuestion["Choice 1"],
-                  quizQuestion["Choice 2"],
-                  quizQuestion["Choice 3"]
+                  quizQuestion['Choice 1'],
+                  quizQuestion['Choice 2'],
+                  quizQuestion['Choice 3'],
                 ],
-                a: quizQuestion["Answer"]
-              }
-            ]
-          });
-        });
+                a: quizQuestion['Answer'],
+              },
+            ],
+          }),
+        );
         this.setState({ loading: false });
       });
   }
@@ -64,7 +62,7 @@ export default class App extends Component {
   handleQuestionSubmit = correct => {
     if (correct) {
       this.setState({
-        correctAnswers: this.state.correctAnswers + 1
+        correctAnswers: this.state.correctAnswers + 1,
       });
     }
   };
@@ -74,11 +72,11 @@ export default class App extends Component {
     if (index >= this.state.quizQuestions.length) {
       this.setState({
         quizCompleted: true,
-        questionIndex: index
+        questionIndex: index,
       });
     } else {
       this.setState({
-        questionIndex: index
+        questionIndex: index,
       });
     }
   };
@@ -87,7 +85,7 @@ export default class App extends Component {
     this.setState({
       correctAnswers: 0,
       questionIndex: 0,
-      quizCompleted: false
+      quizCompleted: false,
     });
   };
 
@@ -100,17 +98,17 @@ export default class App extends Component {
     let currentScore =
       (this.state.correctAnswers / this.state.quizQuestions.length) * 100;
     return (
-      <div className="App">
-        <div className="jumbotron">
+      <div className='App'>
+        <div className='jumbotron'>
           {this.state.quizCompleted ? (
             <>
               <div>Congratulations on finishing the quiz!</div>
               <div>Here is how you did</div>
-              <h1 className="display-1">{currentScore}%</h1>
-              <div className="display-4">{scoreMessage(currentScore)}</div>
+              <h1 className='display-1'>{currentScore}%</h1>
+              <div className='display-4'>{scoreMessage(currentScore)}</div>
               <button
-                className={className("btn", "btn-primary", questionSubmit)}
-                type="submit"
+                className={className('btn', 'btn-primary', questionSubmit)}
+                type='submit'
                 onClick={this.handleQuizReset}
               >
                 Restart Quiz
