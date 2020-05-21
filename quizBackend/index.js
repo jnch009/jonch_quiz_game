@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const port = 3001;
 const path = require('path');
 const csvFilePath = path.resolve(__dirname, './public/quizQuestions.csv');
 const csv = require('csvtojson');
@@ -18,4 +17,6 @@ app.get('/', (req, res) => {
     });
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(process.env.PORT || 3001, () =>
+  console.log(`Example app listening on port ${process.env.PORT || 3001}!`),
+);
