@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/jonch_quiz_game/static/css/main.72130b91.chunk.css",
+    "main.js": "/jonch_quiz_game/static/js/main.554e72a8.chunk.js",
+    "main.js.map": "/jonch_quiz_game/static/js/main.554e72a8.chunk.js.map",
+    "runtime-main.js": "/jonch_quiz_game/static/js/runtime-main.087dd73f.js",
+    "runtime-main.js.map": "/jonch_quiz_game/static/js/runtime-main.087dd73f.js.map",
+    "static/js/2.559d0036.chunk.js": "/jonch_quiz_game/static/js/2.559d0036.chunk.js",
+    "static/js/2.559d0036.chunk.js.map": "/jonch_quiz_game/static/js/2.559d0036.chunk.js.map",
+    "index.html": "/jonch_quiz_game/index.html",
+    "precache-manifest.2a9f82a10bf5137a88f0024f7451eb0e.js": "/jonch_quiz_game/precache-manifest.2a9f82a10bf5137a88f0024f7451eb0e.js",
+    "service-worker.js": "/jonch_quiz_game/service-worker.js",
+    "static/css/main.72130b91.chunk.css.map": "/jonch_quiz_game/static/css/main.72130b91.chunk.css.map",
+    "static/js/2.559d0036.chunk.js.LICENSE.txt": "/jonch_quiz_game/static/js/2.559d0036.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.087dd73f.js",
+    "static/js/2.559d0036.chunk.js",
+    "static/css/main.72130b91.chunk.css",
+    "static/js/main.554e72a8.chunk.js"
+  ]
+}
